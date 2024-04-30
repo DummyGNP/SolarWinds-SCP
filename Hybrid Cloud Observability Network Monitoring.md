@@ -1,4 +1,4 @@
-# Hybrid Cloud Observability Network Monitoring 1
+# Hybrid Cloud Observability Network Monitoring
 ## Exam Content Outline
 1. Network Monitoring (Questions related to these tasks make up 60% of the exam.)
    - SolarWinds MIB Database
@@ -20,8 +20,8 @@
    - Event and Log Collection
    - Rules and Processing Policies
 
-## Network Monitoring (Questions related to these tasks make up 60% of the exam.)
-### SolarWinds MIB Database
+## 1. Network Monitoring (Questions related to these tasks make up 60% of the exam.)
+### 1.1. SolarWinds MIB Database
 #### [What is a MIB, OID, and how they are used in Orion](https://support.solarwinds.com/SuccessCenter/s/article/What-is-a-MIB-OID-and-how-they-are-used)
 
 ##### What are MIBs and OIDs?
@@ -75,7 +75,7 @@ If the OID is not in the MIB database, launch the Create Poller Package wizard, 
 - [Trigger alerts when receiving specific Syslog messages (deprecated)](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/content/core-configuring-syslog-viewer-filters-and-alerts-sw1250.htm)
 - [Syslog alert actions (deprecated)](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/content/core-available-syslog-alert-actions-sw1172.htm)
 
-### Customize SNMP Pollers, UnDP, and Device Studio
+### 1.2. Customize SNMP Pollers, UnDP, and Device Studio
 #### [Orion SNMP Get Type statements](https://support.solarwinds.com/SuccessCenter/s/article/Orion-SNMP-Get-statements)
 
 SNMP Get Type defines the SNMP polling method used by your Universal Device Poller to get the devices' OID values. The polling method is determined primarily by the type of object that you want to poll. MIB values require either GET or GET NEXT, and MIB tables require GET TABLE. The SNMP get types available for Universal Device Pollers are described in the following:
@@ -172,7 +172,7 @@ For table records, only the first five values are returned.
 
 #### [Create custom monitors in the SolarWinds Platform](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-custom-monitoring.htm)
 
-### Network Monitoring Capacity Planning
+### 1.3. Network Monitoring Capacity Planning
 #### [Monitor capacity usage trends on the network and forecast capacity issues in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-capacity-forecasting-sw1526.htm)
 
 #### [Customize capacity forecasting settings for single nodes, interfaces, or volumes in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-customizing-thresholds-and-trend-calculation-methods-for-individual-nodes-sw1536.htm)
@@ -181,7 +181,7 @@ For table records, only the first five values are returned.
 
 #### [Forecast capacity for nodes, interfaces, or volumes in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-forecasting-capacity-for-nodes-or-interfaces-sw1530.htm)
 
-### Network Insight™
+### 1.4. Network Insight™
 #### [Set up monitoring Cisco ASA firewalls in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-set-up-firewalls.htm)
 Data for monitoring Cisco® ASA firewalls is polled by a combination of SNMP and CLI polling. To get accurate ASA-specific information, add the firewall device to NPM as a node, and provide CLI credentials.
 ##### What does CLI polling provide?
@@ -292,7 +292,7 @@ See what ACLs are applied to what interfaces and review those ACLs.
 
 If you have NCM installed, you can compare the configuration of access lists. Click Compare ACL to go to the NCM widget. For more details, see [Manage ACLs on Cisco ASA and Nexus devices](https://documentation.solarwinds.com/en/Success_Center/NCM/Content/NCM-View_Compare_ASA_ACL_Rules.htm) in NCM documentation.
 #### [BROKEN LINK](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-2019-2-palo-alto-feature-overview.htm)
-### NetPath™
+### 1.5. NetPath™
 #### [NetPath requirements for NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-netpath-requirements.htm)
 ##### Probe computer
 Probes are the source of network paths, and the paths are discovered by probes. You [create a probe](https://documentation.solarwinds.com/en/success_center/npm/content/npm-create-a-probe.htm) on a source computer, which must meet the following requirements:
@@ -363,7 +363,7 @@ NetPath™ calculates the recommended path count based on the performance of eac
 #### [Troubleshoot a NetPath service with external path data in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-troubleshoot-a-service-with-external-path-data.htm)
 #### [Create a NetPath service in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-create-a-service.htm)
 #### [NetPath shows No Data Found even Agent is connected and running](https://support.solarwinds.com/SuccessCenter/s/article/NetPath-show-no-Data-Found-on-a-Server)
-### Troubleshooting Issues with Nodes, Interfaces, and SNMP Polling
+### 1.6. Troubleshooting Issues with Nodes, Interfaces, and SNMP Polling
 #### [How Rediscovery Works in the SolarWinds Platform](https://support.solarwinds.com/SuccessCenter/s/article/How-Rediscover-works)
 The concept behind Rediscovery is to poll only device data that is not prone to frequent changes (hence the default 30 mins interval between rediscovery polls). Examples of such data are Vendor, System Name, or MAC/IP addresses. In addition, Rediscovery is used to run remapping for all interfaces/volumes to get updated interface/volume indexes. It's worth noting that Rediscovery of Parent Entity also automatically initiates rediscovery of its child objects (e.g. rediscovering a Node also rediscovers its Volumes and Interfaces).
 #### [Troubleshoot a Test Failed result for SNMP nodes in Orion Platform](https://support.solarwinds.com/SuccessCenter/s/article/Troubleshoot-an-SNMP-Node-SNMP-Test-Failed-result)
@@ -418,7 +418,8 @@ The view now lists discovered interfaces and volumes for the node, and indicates
 #### [Why should I use dependencies](https://support.solarwinds.com/SuccessCenter/s/article/Why-should-I-use-dependencies)
 #### [Monitor hardware health](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-monitoring-hardware-health-sw590.htm)
 #### [Choose the polling method to use in the SolarWinds Platform](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-choosing-your-polling-method-sw1223.htm)
-### Fundamentals of IP Flow Monitoring
+## 2. Flow Monitoring (Questions related to these tasks make up **30%** of the exam.)
+### 2.1. Fundamentals of IP Flow Monitoring
 #### [NTA flow requirements](https://documentation.solarwinds.com/en/success_center/nta/content/nta-nta-flow-requirements-sw145.htm)
 #### [Difference between a polling engine and a collector in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-difference-in-receiving-and-collecting-flow-traffic.htm)
 #### [Cisco Flexible NetFlow configuration](https://documentation.solarwinds.com/en/success_center/nta/content/nta-cisco-flexible-netflow-configuration-sw1985.htm)
@@ -427,7 +428,7 @@ The view now lists discovered interfaces and volumes for the node, and indicates
 #### [How NTA works](https://documentation.solarwinds.com/en/success_center/nta/content/getting-started-guide/nta-how-nta-works.htm)
 #### [THWACK: Cisco NetFlow Configuration](https://thwack.solarwinds.com/product-forums/network-performance-monitor-npm/f/forum/92285/cisco-netflow-configuration)
 #### [What protocols does NTA support?](https://documentation.solarwinds.com/en/success_center/nta/content/getting-started-guide/nta-what-protocols-does-nta-support.htm)
-### IP Flow Monitoring Architecture and Best Practices
+### 2.2. IP Flow Monitoring Architecture and Best Practices
 #### [NTA flow requirements](https://documentation.solarwinds.com/en/success_center/nta/content/nta-nta-flow-requirements-sw145.htm)
 #### [Set up network devices to export NetFlow data](https://documentation.solarwinds.com/en/success_center/nta/content/nta-setting-up-network-devices-to-export-netflow-data-manually-sw75.htm)
 #### [Flow environment best practices](https://documentation.solarwinds.com/en/success_center/nta/content/getting-started-guide/nta-flow-environment-recommendations.htm)
@@ -438,12 +439,54 @@ The view now lists discovered interfaces and volumes for the node, and indicates
 #### [Add flow-enabled devices and interfaces to the SolarWinds Platform database](https://documentation.solarwinds.com/en/success_center/nta/content/nta-adding-flow-enabled-devices-and-interfaces-to-the-orion-database-sw107.htm)
 #### [Difference between a polling engine and a collector in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-difference-in-receiving-and-collecting-flow-traffic.htm)
 #### [Disable flow sources and CBQoS-enabled devices](https://documentation.solarwinds.com/en/success_center/nta/content/nta-deleting-flow-sources-and-cbqos-enabled-devices-sw237.htm)
-
-
-
-
-
-
+### 2.3. Manage Flow Views and Widgets
+#### [Charts in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-working-with-charts-sw834.htm)
+#### [Pie charts in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-pie-charts-sw837.htm)
+#### [Create custom views with the Flow Navigator](https://documentation.solarwinds.com/en/success_center/nta/content/nta-creating-custom-views-with-flow-navigator-sw1200.htm)
+#### [Local NetFlow Source](https://documentation.solarwinds.com/en/success_center/nta/content/nta-local-netflow-source.htm)
+#### [NBAR2 Applications](https://documentation.solarwinds.com/en/success_center/nta/content/nta-applications-nbar2.htm)
+### 2.4. IP Address Groups and Application Port Mapping
+#### [Monitor applications and service ports](https://documentation.solarwinds.com/en/success_center/nta/content/nta-enabling-or-disabling-monitoring-for-ports-or-applications-sw248.htm)
+#### [IP address groups unification with IPAM](https://documentation.solarwinds.com/en/success_center/nta/content/nta-ip-address-groups-unification-with-ipam.htm)
+#### [Applications and service ports in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-configuring-applications-and-service-ports-sw241.htm)
+### 2.5. Optimizing Flow Management
+#### [NTA Settings page](https://documentation.solarwinds.com/en/success_center/nta/content/nta-configuring-netflow-management-settings-sw211.htm)
+#### [IP address groups in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-managing-ip-address-groups-sw272.htm)
+#### [NTA shows "Never" or a date in the past in Netflow Sources "Last Received Netflow"](https://support.solarwinds.com/SuccessCenter/s/article/NTA-shows-Never-or-a-date-in-the-past-in-Netflow-Sources-Last-Received-Netflow)
+#### [Configure resolving IPv4 and IPv6 addresses to DNS hostnames in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-configuring-on-demand-dns-resolution-sw470.htm)
+#### [Top talker optimization in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-configuring-the-nta-top-talker-optimization-sw343.htm)
+#### [NetFlow collector services](https://documentation.solarwinds.com/en/success_center/nta/content/nta-netflow-collector-services-sw323.htm)
+#### [Edit or add collection ports in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-editing-or-adding-colleciton-ports-sw601.htm)
+#### [DNS resolution options in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-dns-resolution-options-in-nta-sw367.htm)
+#### [How does default DNS resolution work in NTA?](https://documentation.solarwinds.com/en/success_center/nta/content/nta-how-does-default-dns-resolution-work-in-nta-sw370.htm)
+#### [Troubleshoot collector services in NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-troubleshooting-collector-services-sw607.htm)
+### 2.6. Flow Navigator and Flow Alerts
+#### [Configure Flow alerts](https://documentation.solarwinds.com/en/success_center/nta/content/nta-configuring-flow-alerts.htm)
+#### [Create custom views with the Flow Navigator](https://documentation.solarwinds.com/en/success_center/nta/content/nta-creating-custom-views-with-flow-navigator-sw1200.htm)
+### 2.7. Troubleshooting Hybrid Cloud Observability IP Flow Monitoring
+#### [Resolve unknown NetFlow traffic](https://documentation.solarwinds.com/en/success_center/nta/content/nta-resolving-unknown-netflow-traffic-sw1478.htm)
+#### [**BROKEN LINK**](https://support.solarwinds.com/SuccessCenter/s/article/NTA-4-2-is-showing-lesser-bandwidth-usage-than-NPM-interface?language=en_US)
+#### [The NPM interface charts are showing less bandwidth utilization than the Netflow charts](https://support.solarwinds.com/SuccessCenter/s/article/The-NPM-interface-charts-are-showing-less-bandwidth-utilization-than-the-Netflow-charts)
+#### [Resolve duplicate flows](https://documentation.solarwinds.com/en/success_center/nta/content/nta-duplicate-flows-sw1681.htm)
+#### [NTA events for unmanaged device](https://support.solarwinds.com/SuccessCenter/s/article/NTA-events-for-unmanaged-device)
+#### [NTA chart issues](https://documentation.solarwinds.com/en/success_center/nta/content/nta-chart-issues-sw1678.htm)
+#### [Required fields in SolarWinds NTA](https://documentation.solarwinds.com/en/success_center/nta/content/nta-required-fields-sw148.htm)
+## 3. Log Analysis and Monitoring (Questions related to these tasks make up **10% of the exam**.)
+### 3.1. Log Collection Requirements and Configuration
+#### [LA 2022.4.1 system requirements](https://documentation.solarwinds.com/en/success_center/la/content/system_requirements/la_2022-4-1_system_requirements.htm#link2)
+### 3.2. Event and Log Collection
+#### [Set up Windows event collection in LA](https://documentation.solarwinds.com/en/success_center/la/content/lm/lm-set-up-windows-event-collection.htm)
+#### [Configure secure syslog settings for Log Analyzer](https://documentation.solarwinds.com/en/success_center/la/content/lm/la-securesyslogsettingsexternal.htm)
+#### [Monitor logs and events with your LA and SolarWinds Platform product license plans](https://documentation.solarwinds.com/en/success_center/la/content/la/la_licensing_model.htm)
+#### [Configure devices to send messages to Log Analyzer](https://documentation.solarwinds.com/en/success_center/la/content/la/la-configure-devices-to-send-messages.htm)
+### 3.3. Rules and Processing Policies
+#### [Create custom log-processing rules in LA](https://documentation.solarwinds.com/en/success_center/la/content/lm/lm-create-custom-rules.htm)
+#### [Set LV storage and search retention period](https://documentation.solarwinds.com/en/success_center/orionplatform/content/lm/lm-configure-log-manager-settings.htm)
+#### [Filter and analyze event logs](https://documentation.solarwinds.com/en/success_center/la/content/lm/lm-filter-analyze-event-logs.htm)
+#### [Filter and view event logs in live mode](https://documentation.solarwinds.com/en/success_center/la/content/lm/lm-view-event-logs-in-live-mode.htm)
+#### [Duplicate rules in LA](https://documentation.solarwinds.com/en/success_center/la/content/duplicate-rules.htm)
+#### [Reorder custom rules in LA](https://documentation.solarwinds.com/en/success_center/la/content/lm/lm-custome-rules-reorder.htm)
+#### [Integrate SolarWinds Platform alerts with LA](https://documentation.solarwinds.com/en/success_center/la/content/lm/lm-aleting.htm)
 
 
 
