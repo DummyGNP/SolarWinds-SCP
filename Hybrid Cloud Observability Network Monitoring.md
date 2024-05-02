@@ -123,6 +123,13 @@ SolarWinds maintains a MIB database that serves as a repository for the OIDs use
 - [Download MIB database from the Customer Portal (offline environments)](https://documentation.solarwinds.com/en/success_center/npm/content/core-downloading-the-solarwinds-mib-database-sw3581.htm#Download2)
 - [Learn more about MIBs](https://documentation.solarwinds.com/en/success_center/npm/content/core-downloading-the-solarwinds-mib-database-sw3581.htm#Learn)
 
+##### Download the MIB Database from the SolarWinds Platform Web Console
+You can check the status of your MIBs database and download the latest MIBs database directly from the SolarWinds Platform Web Console.
+1. Log in to your SolarWinds Platform Web Console.
+2. Click Settings > All Settings > MIBs Management in the Details section. The page informs you about the MIBs database installed on your main polling engine and about the latest available version.
+3. If an updated version of the MIBs database is available, click Download.
+
+This downloads the latest version of the MIBs database as a MIBs.msi file.
 #### [Management Information Base (MIB) in the SolarWinds Platform](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-management-information-base--mib--sw1730.htm)
 
 #### [Create pollers in Device Studio for NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-creating-device-studio-pollers-sw2534.htm)
