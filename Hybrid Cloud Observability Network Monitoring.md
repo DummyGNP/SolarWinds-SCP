@@ -133,27 +133,184 @@ You can check the status of your MIBs database and download the latest MIBs data
 
 ![MIB Management](image.png)
 
+4. After the download completes, run MIBs.msi installer and complete the installation wizard. The Installer informs you when Orion services need to be restarted and restarts them if necessary.
+5. Run the .msi file on all deployed polling engines - on the main polling server, HA backup server, and any additional polling engines.
+
+##### Download the MIB database from the Customer Portal
+When your SolarWinds Platform is not connected to the Internet, download the MIB database from the Customer Portal.
+
+###### Download the MIB database
+1. Log in to the Customer Portal `https://customerportal.solarwinds.com/` using your SolarWinds Customer ID and Password.
+2. In the navigation bar, click Downloads > Orion MIB Database.
+3. On the MIB Database page, click Download As MSI.
+4. If you are using Internet Explorer and it prompts you to add the SolarWinds downloads site `http://solarwinds.s3.amazonaws.com`, add the site to your trusted sites.
+5. Install the MIB database. Follow instructions for [2020.2 and later](https://documentation.solarwinds.com/en/success_center/npm/content/core-downloading-the-solarwinds-mib-database-sw3581.htm#Install2020-2) (offline environment).
+
+###### Install the MIB database in an offline environment
+1. If your SolarWinds Platform is in an offline environment, download the MSI version of the MIBs database and transfer the file to your scalability engines.
+2. Run the MSI on all deployed polling engines - on the main polling engine server, HA backup server, and any additional polling engines.
+
+When finished, you can check the MIBs database version in the MIBs Management view of the SolarWinds Platform Web Console.
+
+###### Learn more about MIBs
+What is a MIB?
+- See [What is a MIB, OID, and how they are used.](https://www.solarwinds.com/documentation/kbloader.aspx?kb=5506)
+
+Check an OID in the SolarWinds MIBs database
+1. Go to the Details view for a device.
+2. In the Management widget, click the MIB Browser button. The online MIB Browser opens. You can navigate through the SolarWinds MIB database and check whether an OID is available.
+
+Add a device MIB
+- If you have a specific device MIB, you can have it added to the SolarWinds MIB database. See [Add MIBs to the SolarWinds MIB database](https://support.solarwinds.com/SuccessCenter/s/article/Add-MIBs-to-the-SolarWinds-MIB-database).
+
 #### [Management Information Base (MIB) in the SolarWinds Platform](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-management-information-base--mib--sw1730.htm)
+Management Information Base (MIB) is a structure that describes all objects a device can report on, such as CPU, fan, or temperature. MIB contains the name, datatype, and the object identifier (OID). MIB is a hierarchical structure, displayed as a navigation tree. Every entry in the MIB tree is a value for a specific component on a specific device.
+
+![MIB drvo](image-1.png)
+
+Each entry in the tree is followed by a number in parenthesis. Each entry in the tree can be specified using the sequence of numbers, such as `1.3.6.1` (`iso.org.dod.internet`). The unique numerical value is the OID.
+
+For more information, see [Management Information Base (MIB) for the Simple Network Management Protocol (SNMP)](https://tools.ietf.org/html/rfc3418).
+##### MIBs in the SolarWinds Platform
+SolarWinds maintains a MIB database that serves as a repository for the OIDs used to monitor a wide variety of network devices. The MIB database is updated regularly.
+
+##### Where to find information about the SolarWinds MIBs database?
+Administrators can find out the currently used version in the SolarWinds Platform Web Console.
+1. Click Settings > All Settings and scroll down to the Details section.
+2. Click MIBs Management and check the details. If a new version is available, [download and install it](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-downloading-the-solarwinds-mib-database-sw3581.htm).
+
+##### How do I check whether an OID is included in the database and polled on a device?
+Use the MIB Browser.
+- In the SolarWinds Platform Web Console, go to the Details view for the device, find the Management widget, and click MIB Browser.
+- Navigate the tree. Click an OID to display more details about in the Selected OID pane.
+
+![MIB Drvo 2](image-2.png)
+
+You can also access the MIB Browser from Device Studio and from Universal Device Poller.
 
 #### [Create pollers in Device Studio for NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-creating-device-studio-pollers-sw2534.htm)
+To poll unique devices or technologies not supported by default, create a custom poller.
+> [!TIP]
+> Reduce the number of Unknown nodes by creating a custom poller.
+1. Click Settings > All Settings, and in the Node & Group management grouping, click Manage Pollers.
+2. Click Create New Poller.
+
+   ![Local Poller Library](image-3.png)
+
+3. Select a polling technology, type the Poller Package Name, select a test node, and click Next.
+   > [!NOTE]
+   > When you are creating the poller, the test node is polled to provide a preview of the results returned by the poller.
+   
+   ![Define General Parameters](image-4.png)
+
+4. On the Specify Data Source tab, select a metric you want to define, and click Define Data Source.
+
+   ![Specify Data Source for Pollers](image-5.png)
+
+5. On the Pick Object Identifier screen, type the OID, or search the MIB database. For information about manually defining OIDs, see [Define object identifiers (OIDs) that do not exist in the SolarWinds MIB database for NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-manually-defining-object-identifiers--oids--sw2546.htm).
+
+   ![alt text](image-6.png)
+
+6. If necessary, click Add Calculated Value to transform the multiple returned values into a single value, or select a different OID.
+   > [!TIP]
+   > Transforming multiple values to a single value is useful if, for example, the device returns CPU usage as a table of four values (with one value for each CPU core), but you want to use a single value for CPU usage. In this case, you can use the Average function to convert the table of values into a single value.
+   
+   For more information, see [What is a formula in NPM?](https://documentation.solarwinds.com/en/success_center/npm/content/core-what-is-a-formula--sw2552.htm)
+7. In the Create a Calculated Value screen, select a function, select an input from the lists, and click Test. You can also define a constant value, for example, if you are creating a CPU and memory poller, and the device you want to poll only supports CPU values.
+   > [!TIP]
+   > Continuing with the previous example, to create an average value out of the four reported values, select the Average function and specify the input values.
+
+   ![alt text](image-7.png)
+
+   For more information, see [Formulas used for transforming Device Studio poller results in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-common-formulas-sw2531.htm).
+8. After testing whether the value is as expected, click Yes, the Data Source Is Reasonable.
+9. To automatically test the poller on newly added nodes, select Automatically poll nodes during network discovery, and click Next. The test determines whether the Device Studio poller can be assigned to the newly added node.
+
+   ![alt text](image-8.png)
+
+10. On the Summary tab, review the poller package settings, and click Submit.
+
+The poller is now available in the list of pollers, and you can assign it to nodes. See [Assign Device Studio pollers to monitored devices in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-assigning-pollers-sw2525.htm).
 
 #### [Monitor custom statistics based on OIDs with Universal Device Pollers in the NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-monitoring-mibs-with-universal-device-pollers-sw548.htm)
 
-UnDPs do not collect data from Orion Failover Engine or Hot Standby Engines. **If a NPM server fails, data collection for any Universal Device Pollers stops on the server.** UnDPs are tied to the polling engine on which they are hosted. If you move a monitored node from one polling engine to another, you must also move the UnDP poller.
+SolarWinds Universal Device Poller (UnDP) is a customization feature of NPM. With UnDP, you can create custom monitors for almost any statistic provided by SNMP based on its Management Information Base (MIB) and object identifier (OID). See [Management Information Base (MIB) in the NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-management-information-base--mib--sw1730.htm).
+With Universal Device Poller, you can monitor:
+- Interface traffic
+- CPU temperature
+- Addressing errors
+- UPS battery status
+- Current connections to a website
 
-#### [Monitor custom statistics based on OIDs with Universal Device Pollers in the NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-monitoring-mibs-with-universal-device-pollers-sw548.htm)
+##### Before you start configuring UnDPs
+- Consult your vendor documentation, and find out which OID you want to monitor. 
+- Create a list of nodes that you want to poll the custom statistic on.
+> [!TIP]
+> UnDPs do not collect data from Orion Failover Engine or Hot Standby Engines. If a NPM server fails, data collection for any Universal Device Pollers stops on the server.
+> 
+> UnDPs are tied to the polling engine on which they are hosted. If you move a monitored node from one polling engine to another, you must also move the UnDP poller.
+
+##### Configure custom pollers for monitoring (Admin)
+- [Define a custom statistic to monitor in the NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-creating-universal-device-pollers-sw551.htm)
+- [Select NPM nodes or interfaces to poll a custom statistic](https://documentation.solarwinds.com/en/success_center/npm/content/core-assigning-pollers-to-nodes-or-interfaces-sw146.htm)
+- [Transform poller results in the SolarWinds Platform](https://documentation.solarwinds.com/en/success_center/npm/content/core-transforming-poller-results-sw704.htm)
+- [View UnDP status on Network Atlas maps in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-mapping-universal-device-pollers-with-network-atlas-sw539.htm)
+- [View Universal Device Poller statistics in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-viewing-universal-device-poller-statistics-sw755.htm)
+- [Create pollers by duplicating and adjusting pollers in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-duplicating-an-existing-poller-sw344.htm)
+- [Export UnDP pollers from NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-exporting-universal-device-pollers-sw503.htm)
+- [Define UnDP Warning and Critical thresholds in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-configuring-universal-device-poller-thresholds-sw3662.htm)
+- [Temporarily suspend collecting statistics for pollers in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-disabling-assigned-pollers-sw326.htm)
+##### Troubleshooting
+- [Update the SolarWinds MIB Database for the SolarWinds Platform](https://documentation.solarwinds.com/en/success_center/npm/content/core-downloading-the-solarwinds-mib-database-sw3581.htm)
 
 #### [Define object identifiers (OIDs) that do not exist in the SolarWinds MIB database for the SolarWinds Platform](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/content/core-manually-defining-object-identifiers--oids--sw2546.htm)
 1. On the Pick Object Identifier screen, select the check box under Manually Define Object Identifier (OID).
-   - Not sure how to get here? See [Create Pollers](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/content/core-creating-device-studio-pollers-sw2534.htm) for more details.
+   > [!NOTE]
+   > Not sure how to get here? See [Create Pollers](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/content/core-creating-device-studio-pollers-sw2534.htm) for more details.
 2. Type the name and OID.
 3. Select the SNMP get type. See [What is the SNMP Get Type?](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/content/core-snmp-get-type-sw2549.htm) for more information.
 4. Click Poll Current Value From Test Node.
 
 #### [This OID is not supported UnDP error in NPM](https://support.solarwinds.com/SuccessCenter/s/article/UNDP-error-This-OID-is-not-supported)
+This OID is not supported can be seen for UNDP not configured correctly or the OIDs does not appear to be present on the MIB of the devices
+
+##### OVERVIEW
+The following errors appears when creating a new universal device poller (UNDP) with an unknown OID:
+`This OID is not supported`
+
+![alt text](image-9.png)
+
+`Unable to poll this OID on the test node. Try using a different OID or a different test Node.`
+
+![alt text](image-10.png)
+
+##### CAUSE
+There are three types of OIDs:
+1. GET
+2. GET NEXT
+3. GET TABLE 
+
+The error occurs when the incorrect OID type is selected. 
+
+##### RESOLUTION
+###### Solution 1:
+1. Collect Run SolarWinds SNMP Walk and verify the corresponding OID.
+2. Most likely this OID does not exist in the node. 
+3. You should refer to the device owner or vendor and get correct OID.
+
+###### Solution 2:
+1. Once you have confirmed OID is correct, on the UNDP you have set up, click Show Advanced Options.
+2. Select the appropriate option. (e.g, Change the type to GET )
+3. Retest the Poller against the node.
 
 #### [Assign an Existing Custom Poller (UnDP) to a New Node](https://support.solarwinds.com/SuccessCenter/s/article/Assign-an-Existing-Custom-Poller-UnDP-to-a-New-Node)
-##### Add a Node
+This article covers when assigning a node to a specific UnDP.
+
+##### OVERVIEW
+This article provides the steps on how to assign an Existing Custom Poller (UnDP) to a new node.
+
+##### RESOLUTION
+###### Add a Node
 1. Open Orion Web Console and navigate to:
    - Settings > Manage Nodes
 2. Click on Add Node
@@ -161,7 +318,7 @@ UnDPs do not collect data from Orion Failover Engine or Hot Standby Engines. **I
 4. Do not change anything under Add Pollers
 5. Do not change anything under Change Properties
 6. Click on Add Node
-##### Assign a Node
+###### Assign a Node
 1. Open Orion **Universal Device Poller** (Default location: C:\Program Files (x86)\SolarWinds\Orion\NPM\UniversalDevicePoller.exe)
    - Start > All Programs > SolarWinds Orion > Universal Device Poller
    - Search > Orion Universal Device Poller
@@ -171,8 +328,52 @@ UnDPs do not collect data from Orion Failover Engine or Hot Standby Engines. **I
 5. Once the test is successful, click on Finish to complete the process
 
 #### [Test Device Studio pollers in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-testing-device-studio-pollers.htm)
+A Device Studio poller may not always be seamlessly supported by the device it is tested on. For example, errors occur if the OID the Device Studio poller polls for is not supported by the device, or if the returned value is not of the expected data type defined by the Device Studio poller.
+
+To get the Device Studio poller working in your environment, try the following:
+- Test the Device Studio poller on a different node.
+- If the device you use for testing is not fully compatible with the Device Studio poller, upgrading the firmware of your test device might help.
+- Modify the Device Studio poller to suit the devices you have. For example, you can modify the OID that is used to poll the device.
+   > [!NOTE]
+   > - Modifying Device Studio pollers this way requires familiarity with the MIB database structure.
+   > - Some of the pollers provided by SolarWinds cannot be modified with Device Studio. You can only modify the poller definition of these pollers in a text editor.
 
 #### [View Universal Device Poller statistics in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/core-viewing-universal-device-poller-statistics-sw755.htm)
+If you want to see a poller results in the SolarWinds Platform Web Console, you need to define which widgets, or resources, should be displayed on which views.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### [What is the SNMP Get Type?](https://www.solarwinds.com/documentation/en/flarehelp/orionplatform/orionplatform_2022-4/content/core-snmp-get-type-sw2549.htm)
 
