@@ -571,9 +571,139 @@ NetPath™ calculates the recommended path count based on the performance of eac
 ![image](https://github.com/DummyGNP/SolarWinds-SCP/assets/88478045/61ef23fb-e631-4aa7-84ff-868dfdde4183)
 
 #### [Create a NetPath probe in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-create-a-probe.htm)
+NetPath™ services are monitored by probes. Orion automatically installs a probe on each polling engine, and you can install a probe on any Windows computer. No other software is required on the path.
+
+A probe is the source you are testing from. It is always the start of the path. Think of a probe as a representative of a user. SolarWinds recommends deploying probes where you have users, for example at each of your office locations.
+> [!NOTE]
+> The probe must be a Windows computer.
+
+##### Create a probe
+You can create a probe when you create a service, or while assigning an additional probe after you create the service:
+1. Click My Dashboards > Network > NetPath Services.
+2. Click **+** next to an entry in the NetPath Services list.
+3. Click Create New Probe.
+4. Enter the required information on the Create New Probe window.
+   > [!NOTE]
+   > Enter the credentials that can be used to log in to the computer and install the software.
+5. Click Create.
+6. Select the probe from the list.
+7. Click Assign.
+
+##### Assign additional probes
+Click **+** next to an entry in the NetPath™ Services list to assign another probe to the service.
+
+##### Disable a probe
+1. Go to NetPath Services. Click My Dashboards > Network > NetPath Services.
+2. Expand the service, and click the switch to disable the probe. If there is no probe enabled for a service, the service is disabled, too. No data for the service is polled.
+   ![NetPath Service](image-11.png)
+
+##### Delete a probe
+1. Go to NetPath Services. Click My Dashboards > Network > NetPath Services.
+2. Expand the service, and click the waste basket icon to delete the probe. Deleting the last probe for a service permanently deletes the service.
+
+##### Troubleshoot probes
+If you are creating a probe on an existing SolarWinds Platform agent, you must enter the primary polling IP address used by Orion for that device.
+
+###### Check the probe status
+If you have other issues with probe deployment, you can check the probe status.
+
+Probes are listed in the Manage Agents section of Agent Management. The NetPath™ probe relies on the Agent infrastructure built into Orion and used for things like QoE and SAM Agents. NetPath™ is an additional plugin in this agent framework.
+1. Click Settings > All Settings.
+2. Under Node & Group Management, click Manage Agents.
+3. Locate the probe in the Agent/Node list by its host name, and select it.
+4. Verify the Agent Status is Running, and that the Connection Status is Connected.
+5. Click More Actions > View installed agent plugins.
+6. Verify the NetPath™ Agent Plugin is installed.
+
+You can also click Edit Settings to change the configuration of the probe, or Delete to remove it.
+
 #### [Troubleshoot a NetPath service with external path data in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-troubleshoot-a-service-with-external-path-data.htm)
+You can use NetPath™ to diagnose a slow connection to an external service. This example uses `amazon.com`.
+1. Click My Dashboards > Network > NetPath Services.
+2. Expand the service that your users reported as slow or unreachable.
+3. Click the probe from the office or location that reported the issue.
+4. Under Path History, locate the date and time for when your users reported the issue. Here, there is a yellow warning entry at 5:09 p.m. on April 20.
+
+   ![Path History](image-12.png)
+5. Click the yellow bar at 5:09 p.m. in the chart.
+6. The problem is in Amazon's network. Click the red Amazon node to expand it.
+
+   ![Node](image-13.png)
+7. Although Amazon's network is large and complex, you should investigate the red and yellow areas.
+
+   ![Branch](image-14.png)
+8. Click the red connection between the two nodes to open the inspector panel.
+9. Expand the Issues section to see that packet loss is over the critical threshold, and that it is 17% likely that transit passed through this link.
+
+   ![Details](image-15.png)
+10. Click the red `205.251.244.209` node to open the inspector panel.
+11. Use the phone number or email address to contact the service provider and report the issue. Present the following information to resolve the issue:
+    - IP addresses of the nodes in question (`54.239.111.33` and `205.251.244.209` in this case)
+    - Date, time, and duration of the performance issue
+    - Latency and packet loss information
+
 #### [Create a NetPath service in NPM](https://documentation.solarwinds.com/en/success_center/npm/content/npm-create-a-service.htm)
+A service is the destination to which you are mapping. It represents an application, and SolarWinds recommends deploying a service for the most important applications that your users rely on. This can be any TCP-based network service, such as `salesforce.com`, `Microsoft Exchange`, `Office365`, or a `file server`.
+
+NetPath™ services are monitored by probes. Orion automatically installs a probe on each polling engine, and you can install a probe on any Windows computer. No other software is required on the path.
+
+##### Create a new service
+1. Click My Dashboards > Network > NetPath Services.Click 
+2. Create New Service.
+3. Enter the service details of the target destination of your network path. The service must be TCP-based.
+   - Enter a host name or IP address and port.
+      > [!NOTE]
+      > SolarWinds recommends using the same information that your users access the application by. For example, if they access your internal site by a host name rather than an IP address, enter the host name in NetPath™. That way NetPath™ gets the same service as your users.
+   - Enter the probing interval in minutes.
+      > [!NOTE]
+      > SolarWinds recommends starting with a 10-minute interval. See the Probing interval section below to learn how to adjust the probing interval.
+   - Click Next.
+4. Select an existing probe from the list, or Create a NetPath probe in NPM to use a new source.
+5. Click Create.
+
+##### Probing interval
+This value determines how often and how long information is polled from the network path. If the value is too low, NetPath™ does not complete the probe and the network path may not show all routes. If the value is too high, the information may not update as frequently as you like.
+- If you probe more frequently, the data updates quicker but accuracy is lost. If this happens, NetPath™ identifies it as an issue on the probe displayed in the graph.
+- If you probe less frequently, the data updates more slowly but the accuracy of the data increases.
+SolarWinds recommends starting with a probing interval of 10 minutes, which is appropriate for most paths. You can adjust the value from there to suit your needs.
+
+Is your network path internal? Does it contain fewer than 10 nodes? If so, you can decrease the interval for more frequent data updates.
+
+Is your network path external and does it contain internet connections? Does it contain more than 10 nodes? If so, you can increase the interval for less load strain on the SolarWinds Platform server, your nodes, and the network. A larger value also saves storage space by writing less NetPath™ data to the database.
+
 #### [NetPath shows No Data Found even Agent is connected and running](https://support.solarwinds.com/SuccessCenter/s/article/NetPath-show-no-Data-Found-on-a-Server)
+NetPath does not show data from a probe and continuously shows the error No Data Found.
+##### OVERVIEW
+You may encounter an issue where Netpath on a specific probe shows No Data Found , but works on other probe with the same device and same configuration.  Also seeing error below:
+
+![alt text](image-16.png)
+
+And in Event Viewer > Solarwinds log following error:
+```
+ErrorCode: NetPath_20026 Message: network info for (IP Address) request failed.
+Exception: System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> 
+System.Net.WebException: Unable to connect to the remote server ---> 
+System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond (IP Address):443 
+at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult) 
+at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult) 
+at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+--- End of inner exception stack trace --- 
+at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult) 
+at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar) 
+--- End of inner exception stack trace --- 
+at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task) 
+at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task) 
+at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task) 
+at SolarWinds.NetPath.Bgp.Statistics.StatisticsClient.RipeStatClient2.<RequestAsync>d__1.MoveNext()
+```
+
+##### RESOLUTION
+###### Resolution 1:
+Access the Device in question
+Check if the WinPcap is properly installed 
+Go to Control Panel > Program and Features 
+
+
 ### 1.6. Troubleshooting Issues with Nodes, Interfaces, and SNMP Polling
 #### [How Rediscovery Works in the SolarWinds Platform](https://support.solarwinds.com/SuccessCenter/s/article/How-Rediscover-works)
 The concept behind Rediscovery is to poll only device data that is not prone to frequent changes (hence the default 30 mins interval between rediscovery polls). Examples of such data are Vendor, System Name, or MAC/IP addresses. In addition, Rediscovery is used to run remapping for all interfaces/volumes to get updated interface/volume indexes. It's worth noting that Rediscovery of Parent Entity also automatically initiates rediscovery of its child objects (e.g. rediscovering a Node also rediscovers its Volumes and Interfaces).
